@@ -15,16 +15,48 @@
 
           function drawRegionsMap() {
 
-            var data = google.visualization.arrayToDataTable([
-                <%= MyProperty %>       
-            ]);
+              var data = google.visualization.arrayToDataTable([
+                ['Country', 'Popularity'],
+                ['Germany', 200],
+                ['Poland', 300],
+                ['Italy', 400],
+                ['Spain', 500],
+                ['France', 600],
+                ['Portugal', 700]
+              ]);
 
-            var options = {};
+              data.addColumn({
+                  type: 'string',
+                  role: 'tooltip',
+                  'p': { 'html': true }
+              });
+              data.addRow(['Greece', 100]);
 
-            var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+              var options = {
+                  region: 150,
+                  colorAxis: { colors: ['#00853f', 'black', '#e31b23'] },
+                  backgroundColor: '#81d4fa',
+                  datalessRegionColor: '#D3D3D3',
+                  defaultColor: '#f5f5f5',
+              };
 
-            chart.draw(data, options);
+              var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+              chart.draw(data, options);
+
+              google.visualization.events.addListener(chart, 'select', function () {
+                  var selectedItem = chart.getSelection()[0];
+                  if (selectedItem) {
+                      var country = data.getValue(selectedItem.row, 0);
+                      if (country = 'France')
+                      {
+                          alert('ciao')
+                      }
+                  }
+
+              });
           }
+            
         </script>
       </head>
       <body>

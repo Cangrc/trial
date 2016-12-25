@@ -14,37 +14,36 @@ namespace HateorLove
 {
     public partial class MainPage : System.Web.UI.Page
     {
-        private string Germany = "N/A";
-        private string Germany = "N/A";
+        protected string aaa = "['Country', 'LoveList'],\n";
+
+        //protected string aaa = "['Country', 'LoveList', 'HateList'],";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Country c = new Country();
+            Person [] plist = new Person [5];
 
-            var tuple5 = Tuple.Create("New York", 1990, 7322564, 2000, 8008278);
+            plist[0] = new Person("OB", 15);
+            plist[1] = new Person("B", 5);
+            plist[2] = new Person("AI", 10);
+            plist[3] = new Person("LDR", 1);
+            plist[4] = new Person("DA", 4);
 
-        }
+            Country c = new Country("Germany", plist, plist );
 
-        protected string MyProperty
-        {     
-            get
-            {
-                return "['Country', 'LoveList', 'HateList']," +
-                        Germany +
-                        "['United States', 300]," +
-                        "['Brazil', 400]," +
-                        "['Canada', 500]," +
-                        "['France', 600]," +
-                        "['RU', 700]";
-            }
-            set
-            {
-                 Germany = "\"['Germany', 200],\"";
-                 US
-            }
+            Console.WriteLine(c.toMyString());
+            Console.WriteLine(aaa);
+            aaa = aaa + c.toMyString();
+            Console.WriteLine(aaa);
+
+            aaa = "['Country', 'Popularity'], ['Germany', 200], ['United States', 300], ['Brazil', 400], ['Canada', 500], ['France', 600], ['RU', 700]";
 
 
-        }
+    }
+
+
+
+
+        
 
     }
 }
