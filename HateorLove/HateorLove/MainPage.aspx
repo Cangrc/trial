@@ -15,24 +15,30 @@
 
           function drawRegionsMap() {
 
-              var data = google.visualization.arrayToDataTable([
+              var data = new google.visualization.DataTable();
+              data.addColumn('string', 'Country');
+              data.addColumn('number', 'Popularity');
+
+              /*var data = google.visualization.arrayToDataTable([
                 ['Country', 'Popularity'],
                 ['Germany', 200],
-                ['Poland', 300],
+                /*['Poland', 300],
                 ['Italy', 400],
                 ['Spain', 500],
                 ['France', 600],
                 ['Portugal', 700]
-              ]);
+              ]);*/
 
               data.addColumn({
                   type: 'string',
                   role: 'tooltip',
                   'p': { 'html': true }
               });
-              data.addRow(['Greece', 100]);
+
+              data.addRow(['Greece', 100, '<div style="background-color:yellow; margin:0; padding:0;">Colorado Springs!</div>']);
 
               var options = {
+                  tooltip: {isHtml: true},
                   region: 150,
                   colorAxis: { colors: ['#00853f', 'black', '#e31b23'] },
                   backgroundColor: '#81d4fa',
