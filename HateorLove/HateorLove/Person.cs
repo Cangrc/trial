@@ -10,6 +10,8 @@ namespace HateorLove
         private string name = "";
         private int score = 0;
 
+        public Person() { }
+
         public Person(string name, int score)
         {
             this.name = name;

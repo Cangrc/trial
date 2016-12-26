@@ -14,29 +14,31 @@ namespace HateorLove
 {
     public partial class MainPage : System.Web.UI.Page
     {
-        protected string aaa = "['Country', 'LoveList'],\n";
-
-        //protected string aaa = "['Country', 'LoveList', 'HateList'],";
+        protected string [] loveNames = new string[5];
+        protected string [] hateNames = new string[5];
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Person [] plist = new Person [5];
+            Person[] loveList = new Person[5];
 
-            plist[0] = new Person("OB", 15);
-            plist[1] = new Person("B", 5);
-            plist[2] = new Person("AI", 10);
-            plist[3] = new Person("LDR", 1);
-            plist[4] = new Person("DA", 4);
+            loveList[0] = new Person("Naci A.", 15);
+            loveList[1] = new Person("Naci B:", 5);
+            loveList[2] = new Person("Naci C.", 10);
+            loveList[3] = new Person("Naci D.", 1);
+            loveList[4] = new Person("naci E.", 4);
 
-            Country c = new Country("Germany", plist, plist );
+            Person [] hateList = new Person [5];
 
-            Console.WriteLine(c.toMyString());
-            Console.WriteLine(aaa);
-            aaa = aaa + c.toMyString();
-            Console.WriteLine(aaa);
+            hateList[0] = new Person("Can A.", 15);
+            hateList[1] = new Person("Can B:", 5);
+            hateList[2] = new Person("Can C.", 10);
+            hateList[3] = new Person("Can D.", 1);
+            hateList[4] = new Person("Can E.", 4);
+            
+            Country Greece = new Country("Greece", loveList, hateList);
 
-            aaa = "['Country', 'Popularity'], ['Germany', 200], ['United States', 300], ['Brazil', 400], ['Canada', 500], ['France', 600], ['RU', 700]";
-
+            loveNames = Greece.toLoveNameArray();
+            hateNames = Greece.toHateNameArray();
 
     }
 
