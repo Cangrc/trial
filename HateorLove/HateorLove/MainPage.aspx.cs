@@ -14,18 +14,24 @@ namespace HateorLove
 {
     public partial class MainPage : System.Web.UI.Page
     {
-        protected string [] loveNames = new string[5];
-        protected string [] hateNames = new string[5];
+        //protected string [] loveNames = new string[5];
+        //protected string [] hateNames = new string[5];
+        protected string loveNames = "";
+        protected string hateNames = "";
+        protected string loveScores = "";
+        protected string hateScores = "";
+        protected int loveScoreSum = 0;
+        protected int hateScoreSum = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             Person[] loveList = new Person[5];
 
             loveList[0] = new Person("Naci A.", 15);
-            loveList[1] = new Person("Naci B:", 5);
+            loveList[1] = new Person("Naci B.", 5);
             loveList[2] = new Person("Naci C.", 10);
             loveList[3] = new Person("Naci D.", 1);
-            loveList[4] = new Person("naci E.", 4);
+            loveList[4] = new Person("Naci E.", 4);
 
             Person [] hateList = new Person [5];
 
@@ -37,10 +43,26 @@ namespace HateorLove
             
             Country Greece = new Country("Greece", loveList, hateList);
 
-            loveNames = Greece.toLoveNameArray();
-            hateNames = Greece.toHateNameArray();
+            loveNames = Greece.toLoveString();
+            hateNames = Greece.toHateString();
+            loveScores = Greece.toLoveScores();
+            hateScores = Greece.toHateScores();
+            loveScoreSum = scoreSum(Greece.getLove());
+            hateScoreSum = scoreSum(Greece.getHate());
 
-    }
+        }
+
+        public int scoreSum(Person [] plist)
+        {
+            int sum = 0;
+
+            for(int i = 0; i < 5; i++)
+            {
+                sum += plist[i].getScore();
+            }
+            
+            return sum;
+        }
 
 
 

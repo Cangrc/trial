@@ -27,14 +27,14 @@ namespace HateorLove
             return name;
         }
 
-        public Person [] getLove(Person[] love)
+        public Person [] getLove()
         {
-            return love;
+            return this.love;
         }
 
-        public Person[] getHate(Person[] hate)
+        public Person[] getHate()
         {
-            return hate;
+            return this.hate;
         }
 
         public void setName(String name)
@@ -80,24 +80,76 @@ namespace HateorLove
             return name;
         }
 
-        /* buna sanırım gerek kalmadı - HTML table formatı çizildi
-         * public string toMyString()
+        public string toLoveString()
         {
-            string result = "['" + name + "', '";
+            string result = "['" ;
 
             string lovelist = "";
+            
+            for (int i = 0; i < topSize; i++)
+            {
+                lovelist = lovelist + love[i].getName() + "', '";
+                if (i == topSize - 1)
+                    lovelist = lovelist + love[i].getName() + "'] ";
+            }
+
+            result = result + lovelist;
+
+            return result;
+        }
+
+        public string toHateString()
+        {
+            string result = "['";
+
             string hatelist = "";
 
             for (int i = 0; i < topSize; i++)
             {
-                lovelist = lovelist + love[i].getName();
-                hatelist = hatelist + "\n" + hate[i].getName();
+                hatelist = hatelist + hate[i].getName() + "', '";
+                if (i == topSize - 1)
+                    hatelist = hatelist + hate[i].getName() + "'] ";
             }
 
-            result = result + lovelist + "']";
-            //result = result + "'" + lovelist + "', " + "'" + hatelist + "']";
+            result = result + hatelist;
 
             return result;
-        }*/
+        }
+
+        public string toLoveScores()
+        {
+            string result = "[";
+
+            string loveScores = "";
+
+            for (int i = 0; i < topSize; i++)
+            {
+                loveScores = loveScores + love[i].getScore() + ", ";
+                if (i == topSize - 1)
+                    loveScores = loveScores + love[i].getScore() + "] ";
+            }
+
+            result = result + loveScores;
+
+            return result;
+        }
+
+        public string toHateScores()
+        {
+            string result = "[";
+
+            string hateScores = "";
+
+            for (int i = 0; i < topSize; i++)
+            {
+                hateScores = hateScores + hate[i].getScore() + ", ";
+                if (i == topSize - 1)
+                    hateScores = hateScores + hate[i].getScore() + "] ";
+            }
+
+            result = result + hateScores;
+
+            return result;
+        }
     }
 }
