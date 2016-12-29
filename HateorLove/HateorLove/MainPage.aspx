@@ -8,9 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HateorLove</title>
         
+    </head>
+    
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
-
+     
           // google.charts.load('upcoming', {'packages':['geochart']});
           google.charts.load('upcoming', {'packages':['corechart', 'geochart']});
           google.charts.setOnLoadCallback(drawRegionsMap);
@@ -89,9 +91,9 @@
                   width:400,
                   height:300};
               var piechartHate = new google.visualization.PieChart(document.getElementById('piechartHate_div'));
-              piechartHate.draw(piedata, piechartHate_options);
-
-              google.visualization.events.addListener(chart, 'select', function () {
+              piechartHate.draw(piedata, piechartHate_options); 
+              
+              function selectCountryHandler() {
                   var selectedItem = chart.getSelection()[0];
                   if (selectedItem) {
                       var country = data.getValue(selectedItem.row, 0);
@@ -120,8 +122,24 @@
                           piechartHate.draw(pieGreeceHate, piechartHate_options);
                       }
                   }
-              });
+              }
+
+              google.visualization.events.addListener(chart, 'select', selectCountryHandler);
+          
+              function selectLoveHandler() {
+                  var selectedItemLove = piechartLove.getSelection()[0];
+                  if (selectedItemLove) {
+                      
+                      var personName = data.getValue(selectedItemLove.row, 0);
+                      alert(personName);
+                      var lovePlusButton = document.getElementById('lovePlus');
+                      lovePlusButton.textContent("Love You " + personName);
+                  }
+              }
+
+              google.visualization.events.addListener(piechartLove, 'select', selectLoveHandler);
           }
+          
 
 
           function createCustomHTMLContent(flagURL, loveList, hateList, loveScoreSum, hateScoreSum) {
@@ -153,17 +171,28 @@
                    
           }
             
-        </script>
-      </head>
-     <body>
-        <div id="regions_div"> </div>
-        <table class="columns">
-        <tr>
-            <td><div id="piechartLove_div" style="border: 1px solid #ccc"></div></td>
-            <td><div id="piechartHate_div" style="border: 1px solid #ccc"></div></td>
-          </tr>
-        </table>
+     </script>
       
-    
-  </body>
+     <body>
+         <form id="form1" runat="server">
+             
+             <div id="regions_div"></div>
+             <table class="columns">
+                 <tr>
+                     <td>
+                         <div id="piechartLove_div" style="border: 1px solid #ccc"></div>
+                     </td>
+
+                     <asp:Button ID="lovePlus" runat="server" Text="Love You" OnClick="loveButton_Click" />
+
+                     <td>
+                         <div id="piechartHate_div" style="border: 1px solid #ccc"></div>
+                     </td>
+
+                     <asp:Button ID="hatePlus" runat="server" Text="Hate You" OnClick="hateButton_Click" />
+                 </tr>
+             </table>
+
+         </form>
+      </body>
 </html>

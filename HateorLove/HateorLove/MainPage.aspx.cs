@@ -64,10 +64,25 @@ namespace HateorLove
             return sum;
         }
 
+        protected void loveButton_Click(Object sender, EventArgs e)
+        {
+            lovePlus.Enabled = false;
+            
+
+
+        }
+
+        protected void hateButton_Click(Object sender, EventArgs e)
+        {
+            hatePlus.Enabled = false;
+            
+
+        }
 
 
 
-        
+
+
 
     }
 }
